@@ -15,7 +15,7 @@ namespace RClient
 
     class RClient
     {
-        public TcpClient RTcpClient = new TcpClient();
+        public TcpClient _client = new TcpClient();
         public IPAddress RClientIPAdress;
         private NLog.Logger logger;
 
@@ -35,19 +35,19 @@ namespace RClient
         {
             try
             {
-                while(!RTcpClient.Connected)
+                while(!_client.Connected)
                 {
-                    RTcpClient.Connect(ServerAddress, ServerPort);
+                    _client.Connect(ServerAddress, ServerPort);
                 }
                 logger.Info("RClient connected {ServAdr} {ServPrt}", ServerAddress, ServerPort);
                 this.CheckIn();
-                return RTcpClient.Connected;
+                return _client.Connected;
             }
 
             catch (Exception e)
             {
                 logger.Error(e);
-                return RTcpClient.Connected;
+                return _client.Connected;
             }
 
 
